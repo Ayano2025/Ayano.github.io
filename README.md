@@ -12,7 +12,7 @@ index.html
             --card-bg: rgba(255, 255, 255, 0.03);
             --text-main: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.4);
-            --accent: #007AFF; /* Классический Apple Blue */
+            --accent: #007AFF; 
             --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -20,6 +20,7 @@ index.html
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -34,33 +35,31 @@ index.html
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Задний фон с мягким свечением */
         .glow {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 350px;
+            height: 350px;
             background: var(--accent);
-            filter: blur(150px);
-            opacity: 0.15;
+            filter: blur(160px);
+            opacity: 0.12;
             z-index: 0;
-            animation: move 10s infinite alternate ease-in-out;
+            animation: move 12s infinite alternate ease-in-out;
         }
 
         @keyframes move {
-            from { transform: translate(-20%, -20%); }
-            to { transform: translate(20%, 20%); }
+            from { transform: translate(-30%, -10%); }
+            to { transform: translate(30%, 10%); }
         }
 
         .container {
             position: relative;
             z-index: 1;
             text-align: center;
-            padding: 20px;
+            padding: 24px;
             width: 100%;
             max-width: 400px;
         }
 
-        /* Шапка */
         .header {
             margin-bottom: 40px;
             opacity: 0;
@@ -68,61 +67,69 @@ index.html
         }
 
         .nickname {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
 
         .sub-header {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 5px;
+            font-size: 0.95rem;
+            margin-top: 6px;
         }
 
-        /* Список правил */
         .rules-list {
             list-style: none;
+            margin-bottom: 30px;
         }
 
         .rule-item {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 18px;
-            border-radius: 22px;
+            border-radius: 20px;
             margin-bottom: 12px;
             font-size: 1rem;
-            font-weight: 400;
             opacity: 0;
             transform: translateY(20px);
-            transition: transform 0.3s ease, background 0.3s ease;
         }
 
-        .rule-item:hover {
-            background: rgba(255, 255, 255, 0.07);
-            transform: scale(1.02);
+        .red-flag {
+            color: #FF453A;
+            font-weight: 500;
         }
 
-        /* Анимация появления элементов по очереди */
+        /* Кнопка Telegram */
+        .tg-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s 1s forwards ease-out; /* Появляется последней */
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.2);
+        }
+
+        .tg-link:active {
+            transform: scale(0.96);
+            filter: brightness(1.1);
+        }
+
+        /* Анимации появления */
         .rule-item:nth-child(1) { animation: fadeInUp 0.8s 0.2s forwards; }
         .rule-item:nth-child(2) { animation: fadeInUp 0.8s 0.4s forwards; }
         .rule-item:nth-child(3) { animation: fadeInUp 0.8s 0.6s forwards; }
         .rule-item:nth-child(4) { animation: fadeInUp 0.8s 0.8s forwards; }
-
-        .red-flag {
-            color: #FF453A; /* iOS Red */
-            font-weight: 500;
-        }
-
-        /* Подпись внизу */
-        .footer {
-            margin-top: 40px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            opacity: 0;
-            animation: fadeIn 2s 1.2s forwards;
-        }
 
         @keyframes fadeInUp {
             to {
@@ -131,13 +138,18 @@ index.html
             }
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 2s 1.5s forwards;
         }
 
-        /* Эффект касания для мобилок */
-        .rule-item:active {
-            transform: scale(0.95);
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -155,11 +167,15 @@ index.html
             <div class="rule-item">Не пиши по херне</div>
             <div class="rule-item red-flag">Угрозы — ЧС</div>
             <div class="rule-item">Уважай моё и своё время</div>
-            <div class="rule-item">Хочешь дела? Пиши по делу.</div>
+            <div class="rule-item">Хочешь дела? Пиши по делу</div>
         </div>
 
+        <a href="https://t.me/aefbi" class="tg-link" target="_blank">
+            Написать в Telegram
+        </a>
+
         <div class="footer">
-            Design inspired by iOS 26 Visual Language
+            Personal Space • 2026
         </div>
     </div>
 
